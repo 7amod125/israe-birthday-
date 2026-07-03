@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Israe 🎂</title>
+<!-- lang: en -->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#ffd6e8,#c9e4ff,#fff2cc);
+    background-size:400% 400%;
+    animation:bgShift 12s ease infinite;
+    font-family:'Trebuchet MS', 'Segoe UI', sans-serif;
+    overflow:hidden;
+    position:relative;
+    perspective:1000px;
+  }
+  @keyframes bgShift {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+
+  h1 {
+    font-size:2.6rem;
+    color:#d63384;
+    text-shadow:2px 2px 0 #fff, 4px 4px 6px rgba(0,0,0,0.15);
+    margin-bottom:6px;
+    text-align:center;
+    animation:pop 1.4s ease infinite alternate;
+  }
+  h2 {
+    font-size:1.4rem;
+    color:#6f42c1;
+    margin-bottom:30px;
+    text-align:center;
+  }
+  @keyframes pop {
+    from{ transform:scale(1); }
+    to{ transform:scale(1.06); }
+  }
+
+  .cake-wrap {
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    transform-style:preserve-3d;
+    animation:rotateCake 8s ease-in-out infinite;
+  }
+  @keyframes rotateCake {
+    0%, 100% { transform:rotateY(-18deg) rotateX(4deg); }
+    50% { transform:rotateY(18deg) rotateX(4deg); }
+  }
+
+  .candles {
+    display:flex;
+    gap:6px;
+    margin-bottom:-4px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:340px;
+  }
+  .candle {
+    width:6px;
+    height:26px;
+    background:linear-gradient(#fff,#ffe28a);
+    position:relative;
+    border-radius:2px;
+  }
+  .flame {
+    width:10px;
+    height:16px;
+    background:radial-gradient(circle at 50% 70%, #fff59d, #ff9800 60%, #e65100);
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    position:absolute;
+    top:-14px;
+    left:-2px;
+    animation:flicker 0.6s ease-in-out infinite alternate;
+    box-shadow:0 0 8px 3px rgba(255,152,0,0.6);
+  }
+  @keyframes flicker {
+    0%{ transform:scale(1) rotate(-2deg); }
+    100%{ transform:scale(1.15) rotate(3deg); }
+  }
+
+  .cake {
+    width:340px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .tier {
+    width:100%;
+    border-radius:14px;
+    position:relative;
+    box-shadow:0 6px 10px rgba(0,0,0,0.15) inset,
+               0 14px 22px rgba(0,0,0,0.35),
+               0 2px 0 rgba(255,255,255,0.4) inset;
+    border:1px solid rgba(0,0,0,0.1);
+  }
+  .tier1 { height:60px; background:linear-gradient(160deg,#ffd1de,#ff8fab 55%,#e8608a); z-index:3; }
+  .tier2 { width:88%; height:70px; background:linear-gradient(160deg,#ddd0ff,#b39ddb 55%,#8a6fc4); margin-top:-6px; z-index:2; }
+  .tier3 { width:100%; height:80px; background:linear-gradient(160deg,#c4f5f3,#7ed6d3 55%,#4fb8b5); margin-top:-6px; z-index:1; }
+
+  .drip {
+    position:absolute;
+    bottom:-10px;
+    left:0;
+    width:100%;
+    height:16px;
+    background:repeating-radial-gradient(circle at 10px 0, #fff, #fff 6px, transparent 7px, transparent 20px);
+    opacity:0.9;
+  }
+
+  .plate {
+    width:380px;
+    height:24px;
+    background:linear-gradient(180deg,#f8f9fa,#ced4da 60%,#adb5bd);
+    border-radius:50%;
+    margin-top:6px;
+    box-shadow:0 12px 18px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.6) inset;
+    transform:rotateX(60deg);
+  }
+
+  .msg {
+    margin-top:26px;
+    font-size:1.1rem;
+    color:#495057;
+    text-align:center;
+    max-width:360px;
+    line-height:1.7;
+  }
+
+  .confetti {
+    position:fixed;
+    top:-10px;
+    width:8px;
+    height:14px;
+    opacity:0.9;
+    animation:fall linear infinite;
+  }
+  @keyframes fall {
+    to { transform:translateY(110vh) rotate(360deg); }
+  }
+
+  .btn {
+    margin-top:24px;
+    padding:12px 28px;
+    background:#d63384;
+    color:#fff;
+    border:none;
+    border-radius:30px;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 6px 12px rgba(214,51,132,0.4);
+    transition:transform 0.2s;
+  }
+  .btn:active { transform:scale(0.95); }
+
+  /* --- Entrance stacking animation --- */
+  .tier-drop {
+    opacity:0;
+    transform:translateY(-260px);
+  }
+  .tier-drop.fall1 { animation:dropIn 0.7s cubic-bezier(.34,1.56,.64,1) 0.2s forwards; }
+  .tier-drop.fall2 { animation:dropIn 0.7s cubic-bezier(.34,1.56,.64,1) 1.0s forwards; }
+  .tier-drop.fall3 { animation:dropIn 0.7s cubic-bezier(.34,1.56,.64,1) 1.8s forwards; }
+  @keyframes dropIn {
+    0% { opacity:0; transform:translateY(-260px); }
+    70% { opacity:1; }
+    100% { opacity:1; transform:translateY(0); }
+  }
+  .hidden-until-ready { opacity:0; transition:opacity 0.6s ease; }
+  .ready { opacity:1; }
+
+  /* --- Quiz section --- */
+  .quiz-box {
+    margin-top:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    max-width:380px;
+    text-align:center;
+  }
+  .quiz-question {
+    font-size:1.15rem;
+    color:#495057;
+    background:rgba(255,255,255,0.6);
+    padding:14px 18px;
+    border-radius:14px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  }
+  .quiz-options { display:flex; gap:14px; }
+  .quiz-btn {
+    padding:10px 26px;
+    border:none;
+    border-radius:24px;
+    font-size:1rem;
+    cursor:pointer;
+    color:#fff;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+    transition:transform 0.15s;
+  }
+  .quiz-btn:active { transform:scale(0.92); }
+  .quiz-btn.yes { background:#4caf9d; }
+  .quiz-btn.no { background:#e76f8b; }
+
+  .final-note {
+    margin-top:10px;
+    font-size:1.2rem;
+    color:#c2185b;
+    background:rgba(255,255,255,0.75);
+    padding:18px 22px;
+    border-radius:16px;
+    max-width:380px;
+    line-height:1.8;
+    box-shadow:0 6px 14px rgba(0,0,0,0.12);
+  }
+
+  .summary-box {
+    margin-top:16px;
+    font-size:0.95rem;
+    color:#6f42c1;
+    background:rgba(255,255,255,0.6);
+    padding:14px 18px;
+    border-radius:12px;
+    max-width:380px;
+    text-align:right;
+    line-height:1.8;
+  }
+</style>
+</head>
+<body>
+
+<!-- مشغل الأغنية مخفي، يحاول التشغيل التلقائي عند دخول الصفحة -->
+<div style="position:absolute;width:0;height:0;overflow:hidden;">
+  <iframe id="ytAudio"
+    width="1" height="1"
+    src="https://www.youtube.com/embed/NQsBl14jZ44?autoplay=1&start=0"
+    allow="autoplay"
+    frameborder="0">
+  </iframe>
+</div>
+<button id="playFallback" class="btn" style="display:none; position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:50;">🔊 Jouer la musique</button>
+
+<h1 class="hidden-until-ready" id="titleEl">🎉 Happy Birthday Israe 🎉</h1>
+<h2 class="hidden-until-ready" id="subtitleEl">Celebrating 15 wonderful years 🎂✨</h2>
+
+<div class="cake-wrap" id="cakeWrap" style="animation:none;">
+  <div class="candles hidden-until-ready" id="candles"></div>
+  <div class="cake">
+    <div class="tier tier1 tier-drop fall1"><div class="drip"></div></div>
+    <div class="tier tier2 tier-drop fall2"><div class="drip"></div></div>
+    <div class="tier tier3 tier-drop fall3"><div class="drip"></div></div>
+  </div>
+  <div class="plate hidden-until-ready" id="plateEl"></div>
+</div>
+
+<p class="msg hidden-until-ready" id="msgEl">🎈 Wishing you a year filled with joy, success, and endless smiles, Israe! Happy 15th birthday 💖</p>
+
+<button class="btn hidden-until-ready" id="celebrateBtn" onclick="burst()">🎊 Celebrate Now</button>
+
+<!-- قسم الأسئلة -->
+<div class="quiz-box hidden-until-ready" id="quizStartWrap">
+  <button class="btn" id="quizStartBtn">Appuyer</button>
+</div>
+
+<div class="quiz-box" id="quizArea" style="display:none;"></div>
+
+<div class="final-note" id="finalNote" style="display:none;">
+  Rayane veut te dire qu'il te donnera ton cadeau d'anniversaire plus tard, et qu'il est vraiment heureux d'avoir une sœur comme toi ❤️🌹
+</div>
+
+<div class="summary-box" id="summaryBox" style="display:none;"></div>
+
+<script>
+  // إنشاء ١٥ شمعة
+  const candlesDiv = document.getElementById('candles');
+  for (let i = 0; i < 15; i++) {
+    const c = document.createElement('div');
+    c.className = 'candle';
+    const f = document.createElement('div');
+    f.className = 'flame';
+    c.appendChild(f);
+    candlesDiv.appendChild(c);
+  }
+
+  function burst() {
+    const colors = ['#ff8fab','#b39ddb','#7ed6d3','#ffe28a','#ff9800','#6f42c1'];
+    for (let i = 0; i < 60; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random()*colors.length)];
+      el.style.animationDuration = (2 + Math.random()*2) + 's';
+      el.style.animationDelay = (Math.random()*0.5) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4500);
+    }
+  }
+
+  // بعد ما تنتهي أنيميشن تجميع الطبقات (حوالي 2.6 ثانية) نظهر الباقي ونفعّل دوران الكيكة
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('titleEl').classList.add('ready');
+      document.getElementById('subtitleEl').classList.add('ready');
+      document.getElementById('candles').classList.add('ready');
+      document.getElementById('plateEl').classList.add('ready');
+      document.getElementById('msgEl').classList.add('ready');
+      document.getElementById('celebrateBtn').classList.add('ready');
+      document.getElementById('quizStartWrap').classList.add('ready');
+      document.getElementById('cakeWrap').style.animation = 'rotateCake 8s ease-in-out infinite';
+      burst();
+    }, 2600);
+
+    // في حال منع المتصفح التشغيل التلقائي للصوت، نظهر زر بديل
+    setTimeout(() => {
+      document.getElementById('playFallback').style.display = 'block';
+    }, 3200);
+  });
+
+  document.getElementById('playFallback').addEventListener('click', () => {
+    const frame = document.getElementById('ytAudio');
+    frame.src = frame.src; // إعادة تحميل لمحاولة التشغيل بعد تفاعل المستخدم
+    document.getElementById('playFallback').style.display = 'none';
+  });
+
+  // ------- الأسئلة التفاعلية -------
+  const questions = [
+    {
+      text: "As-tu passé un bon moment avec Rayan ?",
+      options: [
+        { label: "Oui", value: "Oui" },
+        { label: "Non", value: "Non" }
+      ]
+    },
+    {
+      text: "As-tu aimé le site ?",
+      options: [
+        { label: "Oui", value: "Oui" },
+        { label: "Non", value: "Non" }
+      ]
+    },
+    {
+      text: "Rayane a dit qu'il va retarder ton cadeau d'anniversaire.",
+      options: [
+        { label: "Pas de problème", value: "Pas de problème" },
+        { label: "Je suis fâchée", value: "Je suis fâchée" }
+      ]
+    }
+  ];
+
+  let currentQ = 0;
+  const answers = [];
+
+  document.getElementById('quizStartBtn').addEventListener('click', () => {
+    document.getElementById('quizStartWrap').style.display = 'none';
+    document.getElementById('quizArea').style.display = 'flex';
+    showQuestion();
+  });
+
+  function showQuestion() {
+    const quizArea = document.getElementById('quizArea');
+    quizArea.innerHTML = '';
+    if (currentQ >= questions.length) {
+      finishQuiz();
+      return;
+    }
+    const q = questions[currentQ];
+    const qDiv = document.createElement('div');
+    qDiv.className = 'quiz-question';
+    qDiv.textContent = q.text;
+    quizArea.appendChild(qDiv);
+
+    const optWrap = document.createElement('div');
+    optWrap.className = 'quiz-options';
+    q.options.forEach((opt, idx) => {
+      const b = document.createElement('button');
+      b.className = 'quiz-btn ' + (idx === 0 ? 'yes' : 'no');
+      b.textContent = opt.label;
+      b.onclick = () => {
+        answers.push({ question: q.text, answer: opt.value });
+        currentQ++;
+        showQuestion();
+      };
+      optWrap.appendChild(b);
+    });
+    quizArea.appendChild(optWrap);
+  }
+
+  function finishQuiz() {
+    document.getElementById('quizArea').style.display = 'none';
+    document.getElementById('finalNote').style.display = 'block';
+
+    const summaryBox = document.getElementById('summaryBox');
+    let html = '<strong>ملخص إجاباتك:</strong><br>';
+    answers.forEach(a => {
+      html += `• ${a.question} → <em>${a.answer}</em><br>`;
+    });
+    summaryBox.innerHTML = html;
+    summaryBox.style.display = 'block';
+
+    burst();
+  }
+</script>
+
+</body>
+</html>
